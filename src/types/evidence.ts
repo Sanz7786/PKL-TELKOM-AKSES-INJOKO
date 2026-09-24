@@ -11,7 +11,9 @@ export interface ProjectData {
 export interface EvidenceItem {
   id: string;
   label: string;
-  dataUrl: string | null;
+  dataUrl: string | null; // preview RINGAN untuk ditampilkan di layar
+  file?: File;             // foto ASLI (full resolusi), dipakai saat export PDF
+  wasCompressed?: boolean; // penanda opsional kalau foto ini hasil kompresi
 }
 
 // Dipakai hanya untuk daftar SARAN awal (default) saat halaman dibuka pertama kali

@@ -7,9 +7,10 @@ const Welcome: React.FC = () => {
     <MainLayout activeMenu="welcome" pageTitle="Welcome">
       <div className="welcome-container">
         <div className="welcome-content">
+          <h1 className="welcome-title">Welcome to</h1>
           <img
-            src={`${import.meta.env.BASE_URL}images/logo_konten_wrlcome3.svg`}
-            alt="LACT Icon"
+            src={`${import.meta.env.BASE_URL}images/Logo-TA-New2.png`}
+            alt="Telkom Akses"
             className="welcome-center-icon"
           />
           <p className="welcome-desc">

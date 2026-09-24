@@ -1,3 +1,22 @@
+/* =========================================================
+   PALET WARNA TELKOM (ubah di sini, semua komponen ikut berubah)
+   ========================================================= */
+:root {
+  --ta-red: #EE1C25;              /* merah utama Telkom */
+  --ta-red-dark: #B8141B;         /* merah lebih gelap untuk gradasi */
+  --ta-red-soft: rgba(238, 28, 37, 0.08);
+  --ta-charcoal: #2B2B2D;         /* abu gelap (footer) */
+  --ta-grey-700: #4A4A4C;
+  --ta-grey-300: #D5D7DB;
+  --ta-grey-100: #F3F4F6;
+  --ta-text: #1C1C1C;
+
+  --ta-radius-lg: 18px;
+  --ta-radius-md: 12px;
+  --ta-glass: rgba(255, 255, 255, 0.78);
+  --ta-shadow: 0 8px 24px rgba(28, 28, 28, 0.10);
+}
+
 /* Container Utama Full Screen */
 .layout-wrapper {
   display: flex;
@@ -5,27 +24,39 @@
   height: 100vh;
   width: 100vw;
   font-family: "Poppins", "Inter", sans-serif;
+  color: var(--ta-text);
   background-color: #ffffff;
   overflow: hidden;
 }
 
-/* === HEADER MENGGUNAKAN PNG ANDA === */
+/* === HEADER: putih bersih + garis merah Telkom === */
 .layout-header {
-  height: 90px; /* KUNCI 1: Diperbesar dari 85px agar logo punya ruang napas atas-bawah */
+  height: 90px;
   width: 100%;
-  
-  /* UBAH BARIS INI DENGAN NAMA FILE PNG HEADER ANDA */
-  background-image: url('/images/header new3.png'); 
-  
-  background-size: cover;
-  background-position: left center; /* KUNCI 2: Jangkar gambar di kiri agar logo selalu terlihat utuh */
-  background-repeat: no-repeat;
-  
+
+  background: linear-gradient(90deg, #ffffff 0%, #f7f7f8 60%, #ececee 100%);
+  border-bottom: 4px solid var(--ta-red);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.10);
+
   display: flex;
-  justify-content: flex-end; 
+  justify-content: space-between; /* logo di kiri, badge LACT di kanan */
   align-items: center;
   padding: 0 40px;
+  position: relative;
   z-index: 10;
+}
+
+/* Logo Telkom Akses di header */
+.header-brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
 }
 
 .header-status-area {
@@ -39,7 +70,7 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #ffffff; /* Ubah warna teks jika background PNG-nya gelap */
+  color: var(--ta-text);
 }
 
 .status-dot {
@@ -50,63 +81,61 @@
 }
 
 .profile-badge {
-  background-color: #ED1E28;
+  background: linear-gradient(135deg, var(--ta-red) 0%, var(--ta-red-dark) 100%);
   color: white;
-  
-  /* Tetap bulat */
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%; 
-  
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--ta-red-soft), 0 4px 10px rgba(238, 28, 37, 0.35);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* KUNCI: Kecilkan hurufnya agar tulisan "Admin" muat di dalam lingkaran */
-  font-size: 11px; 
+
+  font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 /* === BODY AREA (PETA, SIDEBAR, KONTEN) === */
 .layout-body {
   flex: 1;
   display: flex;
-  position: relative; 
+  position: relative;
   overflow: hidden;
-  
-  /* === INI KUNCI AGAR KOTAKNYA TIDAK MENYATU === */
-  padding: 24px; /* Memberi jarak agar kotak tidak menempel ke ujung layar */
-  gap: 24px;     /* Memberi celah kosong pemisah antara Sidebar dan Konten */
+
+  padding: 24px;
+  gap: 24px;
 }
 
-/* GAMBAR PETA TEMBUS PANDANG (PENTING!) */
-/* === 2. PETA UTAMA === */
+/* === PETA UTAMA === */
 .body-bg-map {
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 1; /* Peta 100% tajam sesuai desain Anda */
-  z-index: 0; 
+  opacity: 1;
+  z-index: 0;
   pointer-events: none;
 }
 
-/* === SIDEBAR (Dibuat transparan) === */
+/* === SIDEBAR (kaca putih semi-transparan) === */
 .layout-sidebar {
   width: 280px;
-  padding: 30px 20px;
+  padding: 26px 18px;
   position: relative;
-  z-index: 1; 
-  
-  /* === ATUR TRANSPARANSI SIDEBAR DI SINI === */
-  /* Angka 0.35 di paling belakang adalah tingkat transparansinya (Bisa diisi 0.1 sampai 0.9) */
-  background: rgba(255, 255, 255, 0.3); 
-  
-  /* (Opsional) Tambahkan border-radius agar sudut kotaknya membulat manis */
-  border-radius: 12px; 
-  
+  z-index: 1;
+
+  background: var(--ta-glass);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--ta-radius-lg);
+  box-shadow: var(--ta-shadow);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -117,23 +146,23 @@
   display: none;
 }
 .layout-sidebar {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  border-radius: 30px;
+  border-radius: 999px;
   cursor: pointer;
-  color: #1c1c1c;
+  color: var(--ta-text);
   font-weight: 600;
   font-size: 15px;
   transition: all 0.2s ease;
@@ -141,19 +170,15 @@
 }
 
 .nav-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--ta-red-soft);
+  color: var(--ta-red-dark);
 }
 
-/* MENU AKTIF MENGGUNAKAN PNG ANDA */
+/* MENU AKTIF: gradasi merah Telkom */
 .nav-item.active {
   color: white;
-
-  /* UBAH BARIS INI DENGAN NAMA FILE PNG CAPSULE ACTIVE ANDA */
-  background-image: url('/images/sidebar aktif.png'); 
-  
-  background-size: cover;
-  background-position: center left;
-  background-repeat: no-repeat;
+  background: linear-gradient(90deg, var(--ta-red) 0%, var(--ta-red-dark) 100%);
+  box-shadow: 0 6px 14px rgba(238, 28, 37, 0.30);
 }
 
 .nav-icon {
@@ -167,105 +192,117 @@
    GAYA DROPDOWN SUB-MENU GIS TOOLS
    ========================================= */
 
-/* Penanda visual halus jika menu induk (GIS Tools) memiliki anak yang aktif */
 .nav-item.active-parent {
-  color: #ED1E28;
+  color: var(--ta-red);
   font-weight: 700;
-  background-color: rgba(237, 30, 40, 0.05); /* Latar merah sangat tipis */
+  background-color: var(--ta-red-soft);
 }
 
-/* Wadah Sub-menu dengan animasi halus */
 .sub-menu-container {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  max-height: 0; 
-  overflow: hidden; /* Sembunyikan konten jika tinggi 0 */
+  max-height: 0;
+  overflow: hidden;
   transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   opacity: 0;
-  
-  /* Efek Indentasi (Menjorok ke dalam) */
+
   margin-left: 20px;
   padding-left: 10px;
-  border-left: 2px solid rgba(0, 0, 0, 0.1); /* Garis vertikal penanda sub-menu */
+  border-left: 2px solid var(--ta-grey-300);
 }
 
-/* Saat menu dibuka */
 .sub-menu-container.open {
-  max-height: 500px; /* Angka cukup besar agar semua menu muat */
+  max-height: 500px;
   opacity: 1;
   margin-bottom: 10px;
 }
 
-/* Item dalam Sub-menu */
 .sub-menu-item {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  border-radius: 20px; /* Lengkungan sedikit lebih kecil dari menu utama */
+  border-radius: 20px;
   cursor: pointer;
-  color: #1c1c1c;
+  color: var(--ta-text);
   font-weight: 500;
-  font-size: 14px; /* Ukuran font sedikit lebih kecil */
+  font-size: 14px;
   transition: all 0.2s ease;
   background: transparent;
 }
 
 .sub-menu-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--ta-red-soft);
+  color: var(--ta-red-dark);
 }
 
-/* Sub-Menu Aktif menggunakan background capsule yang sama dengan desain Anda */
 .sub-menu-item.active {
   color: white;
-  background-image: url('/images/sidebar aktif.png'); 
-  background-size: cover;
-  background-position: center left;
-  background-repeat: no-repeat;
+  background: linear-gradient(90deg, var(--ta-red) 0%, var(--ta-red-dark) 100%);
 }
 
-/* === KONTEN KANAN (Dibuat transparan) === */
-/* === KONTEN KANAN (Dibuat transparan) === */
-/* === 4. KONTEN KANAN === */
+/* Panah kecil di menu dropdown (Tools LACT / Tools BAUT) */
+.nav-chevron {
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.nav-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* === KONTEN KANAN (kaca putih semi-transparan) === */
 .layout-content {
   flex: 1;
   position: relative;
   z-index: 1;
-  
-  /* === ATUR TRANSPARANSI DI SINI === */
-  background: rgba(255, 255, 255, 0.4); /* Samakan angka 0.75 ini dengan sidebar */
 
-  
-  border-radius: 12px; /* Sudut melengkung disamakan */
-  padding: 30px 40px; 
+  background: var(--ta-glass);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--ta-radius-lg);
+  box-shadow: var(--ta-shadow);
+
+  padding: 30px 40px;
   display: flex;
-  flex-direction: column; 
-  justify-content: flex-start; 
-  align-items: stretch; 
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   overflow-y: auto;
 }
 
+/* Scrollbar tipis dan rapi */
+.layout-content::-webkit-scrollbar {
+  width: 8px;
+}
+.layout-content::-webkit-scrollbar-thumb {
+  background: var(--ta-grey-300);
+  border-radius: 8px;
+}
+.layout-content::-webkit-scrollbar-thumb:hover {
+  background: var(--ta-red);
+}
 
-  /* =========================================
+/* =========================================
    HEADER KHUSUS UNTUK HALAMAN FITUR
    ========================================= */
-
 .feature-page-header {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 50px; 
-  padding: 0 20px;
-  margin-bottom: 24px; /* Jarak antara header dan formulir */
-  border-radius: 10px; 
-  
-  /* Menggunakan gambar PNG Anda */
-  background-image: url('/images/header conten.png'); 
-  background-size: cover;
-  background-position: center left;
-  
+  height: 52px;
+  padding: 0 22px;
+  margin-bottom: 24px;
+  border-radius: var(--ta-radius-md);
+
+  background: linear-gradient(90deg, var(--ta-red) 0%, var(--ta-red-dark) 100%);
+  box-shadow: 0 6px 14px rgba(238, 28, 37, 0.25);
+
   color: #ffffff;
-  flex-shrink: 0; /* Mencegah header gepeng */
+  flex-shrink: 0;
 }
 
 .feature-page-icon {
@@ -273,7 +310,7 @@
   height: 22px;
   margin-right: 15px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Membuat ikon menjadi putih */
+  filter: brightness(0) invert(1);
 }
 
 .feature-page-title {
@@ -289,50 +326,51 @@
   flex-direction: column;
 }
 
-/* === FOOTER === */
+/* === FOOTER: abu gelap + garis merah === */
 .layout-footer {
-  height: 40px; 
+  height: 40px;
   width: 100%;
-  
-  /* Latar belakang PNG Anda */
-  background-image: url('/images/footbar.png'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+
+  background: linear-gradient(90deg, var(--ta-charcoal) 0%, var(--ta-grey-700) 100%);
+  border-top: 3px solid var(--ta-red);
+  position: relative;
   z-index: 10;
-  
-  /* --- KUNCI PENATAAN TEKS FOOTER --- */
+
   display: flex;
-  justify-content: space-between; /* Menyebar elemen ke ujung */
+  justify-content: space-between;
   align-items: center;
-  padding: 0 40px; /* Jarak kiri kanan */
-  color: #ffffff; /* Warna teks putih */
-  font-size: 11px; /* Ukuran teks kecil dan rapi */
+  padding: 0 40px;
+  color: #ffffff;
+  font-size: 11px;
   font-family: "Inter", sans-serif;
 }
 
-/* Mengakali agar teks versi berada persis di tengah */
 .footer-center {
   flex: 1;
   text-align: center;
-  color: #c9c9c9; /* Warna sedikit abu-abu agar tidak terlalu mencolok */
+  color: #c9c9c9;
 }
 
 .footer-right {
   color: #c9c9c9;
 }
 
-/* Warna merah khusus untuk SDI & KERJA PRAKTEK */
+/* Merah khusus KERJA PRAKTEK */
 .text-red {
-  color: #ED1E28;
+  color: var(--ta-red);
   font-weight: 700;
+}
+
+/* Di footer gelap, merah dibuat sedikit lebih terang agar terbaca */
+.layout-footer .text-red {
+  color: #FF5A61;
 }
 
 /* ========================================================
    PAKSA TAMPILAN DESKTOP UNTUK SEMUA PERANGKAT TERMASUK iOS
    ======================================================== */
 body, html {
-  min-width: 1200px !important; /* Paksa lebar minimal seperti layar laptop */
+  min-width: 1200px !important;
   overflow-x: auto !important;
 }
 
@@ -341,12 +379,12 @@ body, html {
 }
 
 .layout-sidebar {
-  width: 280px !important; /* Disamakan dengan lebar awal sidebar di atas (280px) */
+  width: 280px !important;
   min-width: 280px !important;
-  flex-shrink: 0 !important; /* Larang Safari menyusutkan menu ini */
+  flex-shrink: 0 !important;
 }
 
 .layout-content {
   flex-grow: 1 !important;
-  min-width: 800px !important; /* Sisa ruang untuk form di kanan */
+  min-width: 800px !important;
 }

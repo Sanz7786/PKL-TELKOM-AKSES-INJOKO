@@ -22,7 +22,7 @@
 /* === INI KUNCI AGAR LOGO SVG TIDAK TERPOTONG === */
 .welcome-center-icon {
   width: 100%;
-  max-width: 220px; /* Ubah angka ini jika ingin membesarkan/mengecilkan logonya */
+  max-width: 350px; /* Ubah angka ini jika ingin membesarkan/mengecilkan logonya */
   height: auto !important; /* PENTING: Memaksa tinggi gambar mengikuti proporsi asli agar tidak terpotong */
   object-fit: contain;
   margin-bottom: 2px; /* Jarak antara logo dan teks deskripsi */
