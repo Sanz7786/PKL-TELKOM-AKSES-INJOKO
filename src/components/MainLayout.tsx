@@ -13,6 +13,7 @@ const asset = (p: string) => `${import.meta.env.BASE_URL}${p}`;
 const menus = [
   { id: 'welcome', label: 'Welcome', href: '/welcome', icon: 'images/mdi-home-variant1.svg' },
   { id: 'lact-builder', label: 'Buat LACT', href: '/lact', icon: 'images/audit.png' },
+  { id: 'baut-builder', label: 'Buat BAUT', href: '/baut', icon: 'images/audit.png' },
 ];
 
 export default function MainLayout({ children, pageTitle, activeMenu }: MainLayoutProps) {

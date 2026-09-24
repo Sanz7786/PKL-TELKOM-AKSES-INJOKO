@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "idb-keyval": "^6.3.0",
     "jspdf": "^4.2.1",
     "react": "^19.0.1",
