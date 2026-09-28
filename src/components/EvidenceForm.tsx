@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MainLayout from './MainLayout';
 import EvidencePreview from './EvidencePreview';
+import ExportOptionsPanel, {
+  DEFAULT_EXPORT_OPTIONS,
+  QUALITY_PRESETS,
+  buildPdfFileName,
+  type ExportOptions,
+} from './ExportOptions';
 import PhotoCompressor from './PhotoCompressor';
 import { compressImage, formatBytes, MAX_ORIGINAL_BYTES, MAX_ORIGINAL_MB } from '../utils/imageCompress';
 import { generatePdfFromElement } from '../utils/pdfFromElement';
@@ -13,8 +19,6 @@ interface EvidenceFormProps {
   pageTitle: string;
   activeMenu: string;
   defaultItems: DefaultEvidenceItem[];
-  logoLeftSrc?: string;
-  logoRightSrc?: string;
 }
 
 type UploadMode = 'single' | 'bulk' | 'compress';
@@ -52,8 +56,6 @@ export default function EvidenceForm({
   pageTitle,
   activeMenu,
   defaultItems,
-  logoLeftSrc,
-  logoRightSrc,
 }: EvidenceFormProps) {
   // Mode dipilih dari menu sidebar: ?mode=single (default), ?mode=bulk, atau ?mode=compress
   const [searchParams, setSearchParams] = useSearchParams();
@@ -78,6 +80,8 @@ export default function EvidenceForm({
   const [mode, setMode] = useState<'form' | 'preview'>('form');
   const [isProcessing, setIsProcessing] = useState(false);
   const [exportStatus, setExportStatus] = useState('');
+  // Opsi export PDF (logo, kolom, kualitas, dsb.) dipilih di halaman preview
+  const [exportOpts, setExportOpts] = useState<ExportOptions>(DEFAULT_EXPORT_OPTIONS);
 
   // Daftar yang sedang dipakai sesuai mode
   const activeItems = uploadMode === 'bulk' ? bulkItems : items;
@@ -242,7 +246,8 @@ export default function EvidenceForm({
     setIsProcessing(true);
     setExportStatus('');
     try {
-      const safeName = (project.proyek || 'proyek').replace(/\s+/g, '_');
+      // Nama file otomatis dari lokasi (proyek biasanya sama untuk banyak dokumen)
+      const safeName = (project.lokasi || project.proyek || 'dokumen').trim().replace(/\s+/g, '_');
 
       // Foto ASLI dipakai untuk PDF supaya tajam; yang ada di layar hanyalah versi ringan
       const originals: Record<string, Blob> = {};
@@ -252,9 +257,10 @@ export default function EvidenceForm({
 
       await generatePdfFromElement(
         'pdf-preview-content',
-        `${docTitle}_${safeName}.pdf`,
+        buildPdfFileName(exportOpts, `${docTitle}_${safeName}`),
         originals,
-        (done, total) => setExportStatus(`Memproses foto ${done} dari ${total}...`)
+        (done, total) => setExportStatus(`Memproses foto ${done} dari ${total}...`),
+        QUALITY_PRESETS[exportOpts.quality]
       );
     } catch (err) {
       console.error(err);
@@ -279,13 +285,15 @@ export default function EvidenceForm({
           </button>
         </div>
 
+        {/* Panel opsi berada DI LUAR #pdf-preview-content, jadi tidak ikut masuk PDF */}
+        <ExportOptionsPanel value={exportOpts} onChange={setExportOpts} />
+
         <div id="pdf-preview-content">
           <EvidencePreview
             docTitle={docHeading}
             project={project}
             items={activeItems}
-            logoLeftSrc={logoLeftSrc}
-            logoRightSrc={logoRightSrc}
+            options={exportOpts}
           />
         </div>
       </MainLayout>

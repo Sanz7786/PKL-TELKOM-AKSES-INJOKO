@@ -1,0 +1,54 @@
+/* ===== Panel "Opsi Export PDF" ===== */
+
+.export-options {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.export-options summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+}
+
+.export-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px 16px;
+  margin-top: 12px;
+}
+
+.export-options-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.export-options-grid label.export-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-options-grid select,
+.export-options-grid input[type='text'] {
+  padding: 7px 9px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #fff;
+}
+
+.export-options-hint {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: #777;
+  margin: 0;
+}

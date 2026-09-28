@@ -19,8 +19,6 @@ export default function Lact() {
       pageTitle="Buat LACT"
       activeMenu="lact-builder"
       defaultItems={lactDefaultItems}
-      // logoLeftSrc="/PKL-TELKOM-AKSES-INJOKO/images/logo-infranexia.png"
-      // logoRightSrc="/PKL-TELKOM-AKSES-INJOKO/images/logo-telkomakses.png"
     />
   );
 }

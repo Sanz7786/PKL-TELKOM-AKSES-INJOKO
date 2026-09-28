@@ -1,6 +1,15 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+export interface PdfQualitySetting {
+  /** Ketajaman screenshot tiap halaman (2 = hemat, 3 = tajam). */
+  scale: number;
+  /** Kualitas JPEG 0-1 (makin kecil, file makin ringan). */
+  jpeg: number;
+}
+
+const DEFAULT_QUALITY: PdfQualitySetting = { scale: 3, jpeg: 0.85 };
+
 function swapImageSrc(img: HTMLImageElement, url: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const cleanup = () => {
@@ -21,11 +30,26 @@ function swapImageSrc(img: HTMLImageElement, url: string): Promise<void> {
   });
 }
 
+/** Pastikan semua gambar (termasuk logo) sudah selesai dimuat sebelum discreenshot. */
+async function waitForImages(root: HTMLElement): Promise<void> {
+  const imgs = Array.from(root.querySelectorAll('img'));
+  await Promise.all(
+    imgs.map((img) =>
+      img.complete
+        ? Promise.resolve()
+        : new Promise<void>((resolve) => {
+            img.addEventListener('load', () => resolve(), { once: true });
+            img.addEventListener('error', () => resolve(), { once: true });
+          })
+    )
+  );
+}
+
 /**
  * Mengambil "screenshot" dari SETIAP elemen .pdf-page di dalam elemen preview,
  * lalu menjadikan tiap screenshot itu SATU HALAMAN PDF TERPISAH. Ini supaya
  * batas antar halaman selalu jatuh di antara halaman (bukan memotong tengah
- * kotak foto), karena EvidencePreview.tsx sudah membagi foto max 6/halaman.
+ * kotak foto).
  *
  * SEBELUM discreenshot, setiap foto evidence yang punya versi ASLI (di `originals`,
  * dikunci berdasarkan id evidence-nya) akan DIGANTI SEMENTARA dari versi ringan
@@ -36,12 +60,15 @@ function swapImageSrc(img: HTMLImageElement, url: string): Promise<void> {
  * Catatan: html2canvas tidak menerapkan CSS `object-fit`, jadi proporsi foto
  * dijaga lewat ukuran otomatis + tinggi maksimal di EvidencePreview.tsx
  * dan style_Evidence.css (bukan lewat object-fit).
+ *
+ * `quality` opsional (dari panel "Opsi Export PDF"); kosong = standar.
  */
 export async function generatePdfFromElement(
   elementId: string,
   fileName: string,
   originals: Record<string, Blob> = {},
-  onProgress?: (done: number, total: number) => void
+  onProgress?: (done: number, total: number) => void,
+  quality: PdfQualitySetting = DEFAULT_QUALITY
 ): Promise<void> {
   const container = document.getElementById(elementId);
   if (!container) {
@@ -80,18 +107,20 @@ export async function generatePdfFromElement(
       onProgress?.(done, total);
     }
 
+    await waitForImages(container);
+
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
 
     for (let i = 0; i < pageEls.length; i++) {
       const canvas = await html2canvas(pageEls[i], {
-        scale: 3, // resolusi tinggi supaya foto asli tetap tajam
+        scale: quality.scale,
         useCORS: true,
         backgroundColor: '#ffffff',
       });
 
-      const imgData = canvas.toDataURL('image/jpeg', 0.85);
+      const imgData = canvas.toDataURL('image/jpeg', quality.jpeg);
 
       // Lebar penuh; kalau kelewat tinggi, perkecil proporsional agar tidak terpotong
       let w = pageW;
