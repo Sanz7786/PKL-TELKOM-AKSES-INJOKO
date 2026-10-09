@@ -88,6 +88,139 @@
   font-weight: 400;
 }
 
+/* Titik dua Nama/NIK/Jabatan dipisah jadi kolom sendiri (dipakai LACT; di BAUT tampil seperti semula) */
+.pdf-ba-signer-colon {
+  margin-right: 4px;
+}
+
+/* =====================================================================
+   VARIAN LACT — mengikuti tampilan Laporan Commisioning Test asli (A4, Calibri 10pt).
+   Semua aturan di-scope ke .pdf-ba-lact sehingga BAUT TIDAK ikut berubah.
+   ===================================================================== */
+
+.pdf-ba-lact.pdf-page {
+  position: relative;
+  padding: 32px 66px 56px 96px; /* margin kiri 96px, kanan 66px seperti dokumen asli */
+  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
+  font-size: 10pt;
+  line-height: 1.22;
+  color: #000;
+}
+
+.pdf-ba-lact .pdf-title {
+  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
+  font-size: 14pt;
+  font-weight: 700;
+  margin: 10px 0 22px;
+}
+
+/* Tabel info: garis TUNGGAL tipis (bukan ganda tebal), label tidak bold, sedikit menjorok */
+.pdf-ba-lact .pdf-info-table {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 6px 0 10px 11px;
+  margin: 0 30px 34px 0;
+}
+
+/* Hilangkan garis kedua (efek garis ganda) bawaan style_Evidence.css */
+.pdf-ba-lact .pdf-info-table::before,
+.pdf-ba-lact .pdf-info-table::after {
+  display: none;
+}
+
+.pdf-ba-lact .pdf-info-row {
+  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
+  font-size: 10pt;
+  line-height: 1.22;
+  padding: 0;
+}
+
+.pdf-ba-lact .pdf-info-label {
+  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
+  font-weight: 400;
+  width: 108px;
+}
+
+.pdf-ba-lact .pdf-ba-paragraph {
+  font-size: 10.5pt;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.pdf-ba-lact .pdf-ba-closing {
+  font-size: 10pt;
+  line-height: 1.22;
+}
+
+/* Nama proyek & lokasi di paragraf "Sehubungan dengan" tampil tebal & sedikit lebih besar */
+.pdf-ba-lact .pdf-ba-strong {
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+/* Nama / NIK / Jabatan: font 11pt, titik dua sejajar, menjorok 37px */
+.pdf-ba-lact .pdf-ba-signer {
+  margin: 0 0 16px 37px;
+}
+
+.pdf-ba-lact .pdf-ba-signer-row {
+  font-size: 11pt;
+  padding: 0;
+}
+
+.pdf-ba-lact .pdf-ba-signer-label {
+  width: 85px;
+}
+
+.pdf-ba-lact .pdf-ba-signer-colon {
+  width: 28px;
+  margin-right: 0;
+}
+
+/* Poin 1 & 2: nomor di tepi kiri, teks menjorok 30px */
+.pdf-ba-lact .pdf-ba-items {
+  margin: 0 0 16px;
+}
+
+.pdf-ba-lact .pdf-ba-item {
+  display: flex;
+  font-size: 10.5pt;
+  line-height: 1.15;
+}
+
+.pdf-ba-lact .pdf-ba-item-num {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+/* Blok tanda tangan: lebih ke bawah, rata kanan sejajar margin */
+.pdf-ba-lact .pdf-ba-sign-wrap {
+  margin-top: 130px;
+}
+
+.pdf-ba-lact .pdf-ba-sign-block {
+  width: 220px;
+  font-size: 10pt;
+}
+
+.pdf-ba-lact .pdf-ba-sign-block p {
+  margin: 0;
+  line-height: 1.22;
+}
+
+.pdf-ba-lact .pdf-ba-sign-space {
+  height: 96px;
+  margin: 0;
+}
+
+/* Footer "Page X of" di pojok kanan bawah */
+.pdf-ba-lact .pdf-ba-footer {
+  position: absolute;
+  right: 102px;
+  bottom: 20px;
+  font-size: 9pt;
+}
+
 /* ===== Form: pilihan telah/belum dkk. sebagai tombol pilihan sederhana ===== */
 
 .ba-choice-group {

@@ -14,6 +14,11 @@ interface DaftarIsiPageProps {
   titleLine2: string;
   titleLine3: string;
   items: DaftarIsiItem[];
+  /** 'lact' = tampilan mengikuti Daftar Isi LACT asli; 'default' = BAUT */
+  variant?: 'lact' | 'default';
+  /** Footer "Page X of Y" (hanya varian LACT). Kosongkan nomor untuk menyembunyikan footer. */
+  pageNumber?: string;
+  pageTotal?: string;
 }
 
 export default function DaftarIsiPage({
@@ -23,9 +28,13 @@ export default function DaftarIsiPage({
   titleLine2,
   titleLine3,
   items,
+  variant = 'default',
+  pageNumber = '',
+  pageTotal = '',
 }: DaftarIsiPageProps) {
+  const isLact = variant === 'lact';
   return (
-    <div className="pdf-page pdf-toc-page">
+    <div className={`pdf-page pdf-toc-page${isLact ? ' pdf-toc-lact' : ''}`}>
       <PdfHeader showLogos={showLogos} logoSize={logoSize} />
 
       <h1 className="pdf-toc-title">
@@ -44,6 +53,12 @@ export default function DaftarIsiPage({
           </li>
         ))}
       </ol>
+
+      {isLact && pageNumber.trim() !== '' && (
+        <div className="pdf-toc-footer">
+          Page {pageNumber.trim()} of{pageTotal.trim() ? ` ${pageTotal.trim()}` : ''}
+        </div>
+      )}
     </div>
   );
 }

@@ -28,6 +28,11 @@ interface BeritaAcaraPageProps {
   choice2b: ChoicePair;
   closingText: string;
   signatureDataUrl: string | null;
+  /** 'lact' = tampilan mengikuti Laporan Commisioning Test asli; 'default' = BAUT */
+  variant?: 'lact' | 'default';
+  /** Footer "Page X of Y" (hanya dipakai varian LACT). Kosongkan nomor untuk menyembunyikan footer. */
+  pageNumber?: string;
+  pageTotal?: string;
 }
 
 /** Menampilkan satu pasangan pilihan coret, mis. "telah / ~~belum~~" */
@@ -61,14 +66,18 @@ export default function BeritaAcaraPage({
   choice2b,
   closingText,
   signatureDataUrl,
+  variant = 'default',
+  pageNumber = '',
+  pageTotal = '',
 }: BeritaAcaraPageProps) {
+  const isLact = variant === 'lact';
   const tgl = parseDateLocal(tanggalISO);
   const kata = tgl
     ? formatTanggalKata(tgl)
     : { hari: '…', tanggal: '…', bulan: '…', tahun: '…', singkat: '…' };
 
   return (
-    <div className="pdf-page pdf-ba-page">
+    <div className={`pdf-page pdf-ba-page${isLact ? ' pdf-ba-lact' : ''}`}>
       <PdfHeader showLogos={showLogos} logoSize={logoSize} />
 
       <h1 className="pdf-title">{docTitle}</h1>
@@ -108,38 +117,60 @@ export default function BeritaAcaraPage({
       <div className="pdf-ba-signer">
         <div className="pdf-ba-signer-row">
           <span className="pdf-ba-signer-label">Nama</span>
-          <span>: {nama}</span>
+          <span className="pdf-ba-signer-colon">:</span>
+          <span>{nama}</span>
         </div>
         <div className="pdf-ba-signer-row">
           <span className="pdf-ba-signer-label">NIK</span>
-          <span>: {nik}</span>
+          <span className="pdf-ba-signer-colon">:</span>
+          <span>{nik}</span>
         </div>
         <div className="pdf-ba-signer-row">
           <span className="pdf-ba-signer-label">Jabatan</span>
+          <span className="pdf-ba-signer-colon">:</span>
           <span>
-            : {jabatanBaris1} {jabatanBaris2}
+            {jabatanBaris1} {jabatanBaris2}
           </span>
         </div>
       </div>
 
       <p className="pdf-ba-paragraph">
-        Sehubungan dengan <b>{project.proyek}</b> menerangkan bahwa telah melaksanakan pemeriksaan
-        kesisteman (Commisioning Test) dan fisik pada lokasi <b>{project.lokasi}</b> sebagai
+        Sehubungan dengan <b className="pdf-ba-strong">{project.proyek}</b> menerangkan bahwa telah melaksanakan pemeriksaan
+        kesisteman (Commisioning Test) dan fisik pada lokasi <b className="pdf-ba-strong">{project.lokasi}</b> sebagai
         berikut&nbsp;:
       </p>
 
-      <ol className="pdf-ba-numbered">
-        <li>
-          Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
-          TELKOM
-        </li>
-        <li>
-          Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
-          diajukan Uji Terima (UT)
-        </li>
-      </ol>
+      {isLact ? (
+        <div className="pdf-ba-items">
+          <div className="pdf-ba-item">
+            <span className="pdf-ba-item-num">1.</span>
+            <span>
+              Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
+              TELKOM
+            </span>
+          </div>
+          <div className="pdf-ba-item">
+            <span className="pdf-ba-item-num">2.</span>
+            <span>
+              Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
+              diajukan Uji Terima (UT)
+            </span>
+          </div>
+        </div>
+      ) : (
+        <ol className="pdf-ba-numbered">
+          <li>
+            Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
+            TELKOM
+          </li>
+          <li>
+            Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
+            diajukan Uji Terima (UT)
+          </li>
+        </ol>
+      )}
 
-      <p className="pdf-ba-paragraph">{closingText}</p>
+      <p className="pdf-ba-paragraph pdf-ba-closing">{closingText}</p>
 
       <div className="pdf-ba-sign-wrap">
         <div className="pdf-ba-sign-block">
@@ -157,6 +188,12 @@ export default function BeritaAcaraPage({
           <p>NIK. {nik}</p>
         </div>
       </div>
+
+      {isLact && pageNumber.trim() !== '' && (
+        <div className="pdf-ba-footer">
+          Page {pageNumber.trim()} of{pageTotal.trim() ? ` ${pageTotal.trim()}` : ''}
+        </div>
+      )}
     </div>
   );
 }

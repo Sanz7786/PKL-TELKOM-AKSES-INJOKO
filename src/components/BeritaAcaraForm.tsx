@@ -75,6 +75,7 @@ export default function BeritaAcaraForm({
   const [jabatanBaris1, setJabatanBaris1] = useState('WASPANG');
   const [jabatanBaris2, setJabatanBaris2] = useState('PT. TELKOM AKSES');
   const [kota, setKota] = useState('');
+  const isLact = docTitle === 'LACT';
 
   const [choice1, setChoice1] = useState<0 | 1>(0); // telah / belum
   const [choice2a, setChoice2a] = useState<0 | 1>(0); // dapat / tidak dapat
@@ -185,6 +186,8 @@ export default function BeritaAcaraForm({
             choice2b={buildPair(['layak', 'tidak layak'], choice2b)}
             closingText={closingText}
             signatureDataUrl={signatureDataUrl}
+            variant={isLact ? 'lact' : 'default'}
+            pageNumber="4"
           />
         </div>
       </MainLayout>
