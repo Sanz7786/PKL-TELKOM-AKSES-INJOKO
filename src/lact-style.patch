@@ -1,0 +1,413 @@
+diff --git a/src/assets/style_BeritaAcara.css b/src/assets/style_BeritaAcara.css
+index e9185ba..ddfc2c2 100644
+--- a/src/assets/style_BeritaAcara.css
++++ b/src/assets/style_BeritaAcara.css
+@@ -88,6 +88,139 @@
+   font-weight: 400;
+ }
+ 
++/* Titik dua Nama/NIK/Jabatan dipisah jadi kolom sendiri (dipakai LACT; di BAUT tampil seperti semula) */
++.pdf-ba-signer-colon {
++  margin-right: 4px;
++}
++
++/* =====================================================================
++   VARIAN LACT — mengikuti tampilan Laporan Commisioning Test asli (A4, Calibri 10pt).
++   Semua aturan di-scope ke .pdf-ba-lact sehingga BAUT TIDAK ikut berubah.
++   ===================================================================== */
++
++.pdf-ba-lact.pdf-page {
++  position: relative;
++  padding: 32px 66px 56px 96px; /* margin kiri 96px, kanan 66px seperti dokumen asli */
++  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
++  font-size: 10pt;
++  line-height: 1.22;
++  color: #000;
++}
++
++.pdf-ba-lact .pdf-title {
++  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
++  font-size: 14pt;
++  font-weight: 700;
++  margin: 10px 0 22px;
++}
++
++/* Tabel info: garis TUNGGAL tipis (bukan ganda tebal), label tidak bold, sedikit menjorok */
++.pdf-ba-lact .pdf-info-table {
++  border-top: 1px solid #000;
++  border-bottom: 1px solid #000;
++  padding: 6px 0 10px 11px;
++  margin: 0 30px 34px 0;
++}
++
++/* Hilangkan garis kedua (efek garis ganda) bawaan style_Evidence.css */
++.pdf-ba-lact .pdf-info-table::before,
++.pdf-ba-lact .pdf-info-table::after {
++  display: none;
++}
++
++.pdf-ba-lact .pdf-info-row {
++  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
++  font-size: 10pt;
++  line-height: 1.22;
++  padding: 0;
++}
++
++.pdf-ba-lact .pdf-info-label {
++  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
++  font-weight: 400;
++  width: 108px;
++}
++
++.pdf-ba-lact .pdf-ba-paragraph {
++  font-size: 10.5pt;
++  line-height: 1.15;
++  margin: 0 0 16px;
++}
++
++.pdf-ba-lact .pdf-ba-closing {
++  font-size: 10pt;
++  line-height: 1.22;
++}
++
++/* Nama proyek & lokasi di paragraf "Sehubungan dengan" tampil tebal & sedikit lebih besar */
++.pdf-ba-lact .pdf-ba-strong {
++  font-size: 11pt;
++  font-weight: 700;
++}
++
++/* Nama / NIK / Jabatan: font 11pt, titik dua sejajar, menjorok 37px */
++.pdf-ba-lact .pdf-ba-signer {
++  margin: 0 0 16px 37px;
++}
++
++.pdf-ba-lact .pdf-ba-signer-row {
++  font-size: 11pt;
++  padding: 0;
++}
++
++.pdf-ba-lact .pdf-ba-signer-label {
++  width: 85px;
++}
++
++.pdf-ba-lact .pdf-ba-signer-colon {
++  width: 28px;
++  margin-right: 0;
++}
++
++/* Poin 1 & 2: nomor di tepi kiri, teks menjorok 30px */
++.pdf-ba-lact .pdf-ba-items {
++  margin: 0 0 16px;
++}
++
++.pdf-ba-lact .pdf-ba-item {
++  display: flex;
++  font-size: 10.5pt;
++  line-height: 1.15;
++}
++
++.pdf-ba-lact .pdf-ba-item-num {
++  width: 30px;
++  flex-shrink: 0;
++}
++
++/* Blok tanda tangan: lebih ke bawah, rata kanan sejajar margin */
++.pdf-ba-lact .pdf-ba-sign-wrap {
++  margin-top: 130px;
++}
++
++.pdf-ba-lact .pdf-ba-sign-block {
++  width: 220px;
++  font-size: 10pt;
++}
++
++.pdf-ba-lact .pdf-ba-sign-block p {
++  margin: 0;
++  line-height: 1.22;
++}
++
++.pdf-ba-lact .pdf-ba-sign-space {
++  height: 96px;
++  margin: 0;
++}
++
++/* Footer "Page X of" di pojok kanan bawah */
++.pdf-ba-lact .pdf-ba-footer {
++  position: absolute;
++  right: 102px;
++  bottom: 20px;
++  font-size: 9pt;
++}
++
+ /* ===== Form: pilihan telah/belum dkk. sebagai tombol pilihan sederhana ===== */
+ 
+ .ba-choice-group {
+diff --git a/src/assets/style_DaftarIsi.css b/src/assets/style_DaftarIsi.css
+index 9b03959..1bfa778 100644
+--- a/src/assets/style_DaftarIsi.css
++++ b/src/assets/style_DaftarIsi.css
+@@ -36,4 +36,46 @@
+ .pdf-toc-item-number {
+   flex-shrink: 0;
+   width: 26px;
+-}
+\ No newline at end of file
++}
++
++/* =====================================================================
++   VARIAN LACT — mengikuti Daftar Isi LACT asli (A4, Calibri).
++   Di-scope ke .pdf-toc-lact sehingga BAUT TIDAK ikut berubah.
++   ===================================================================== */
++
++.pdf-toc-lact.pdf-page {
++  position: relative;
++  padding: 32px 66px 56px 96px; /* margin kiri 96px, kanan 66px seperti dokumen asli */
++  color: #000;
++}
++
++.pdf-toc-lact .pdf-toc-title {
++  font-size: 20pt;
++  line-height: 1.22;
++  margin: 36px 0 0;
++}
++
++.pdf-toc-lact .pdf-toc-list {
++  margin: 117px 0 0;
++  padding: 0 0 0 11px;
++}
++
++.pdf-toc-lact .pdf-toc-item {
++  gap: 0;
++  font-size: 16pt;
++  line-height: 1.22;
++  margin-bottom: 13px;
++}
++
++.pdf-toc-lact .pdf-toc-item-number {
++  width: 24px;
++}
++
++/* Footer "Page X of" di pojok kanan bawah */
++.pdf-toc-lact .pdf-toc-footer {
++  position: absolute;
++  right: 102px;
++  bottom: 20px;
++  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
++  font-size: 9pt;
++}
+diff --git a/src/components/BeritaAcaraForm.tsx b/src/components/BeritaAcaraForm.tsx
+index 8add9e8..921360d 100644
+--- a/src/components/BeritaAcaraForm.tsx
++++ b/src/components/BeritaAcaraForm.tsx
+@@ -75,6 +75,7 @@ export default function BeritaAcaraForm({
+   const [jabatanBaris1, setJabatanBaris1] = useState('WASPANG');
+   const [jabatanBaris2, setJabatanBaris2] = useState('PT. TELKOM AKSES');
+   const [kota, setKota] = useState('');
++  const isLact = docTitle === 'LACT';
+ 
+   const [choice1, setChoice1] = useState<0 | 1>(0); // telah / belum
+   const [choice2a, setChoice2a] = useState<0 | 1>(0); // dapat / tidak dapat
+@@ -185,6 +186,8 @@ export default function BeritaAcaraForm({
+             choice2b={buildPair(['layak', 'tidak layak'], choice2b)}
+             closingText={closingText}
+             signatureDataUrl={signatureDataUrl}
++            variant={isLact ? 'lact' : 'default'}
++            pageNumber="4"
+           />
+         </div>
+       </MainLayout>
+diff --git a/src/components/BeritaAcaraPage.tsx b/src/components/BeritaAcaraPage.tsx
+index d1efc8f..30fed87 100644
+--- a/src/components/BeritaAcaraPage.tsx
++++ b/src/components/BeritaAcaraPage.tsx
+@@ -28,6 +28,11 @@ interface BeritaAcaraPageProps {
+   choice2b: ChoicePair;
+   closingText: string;
+   signatureDataUrl: string | null;
++  /** 'lact' = tampilan mengikuti Laporan Commisioning Test asli; 'default' = BAUT */
++  variant?: 'lact' | 'default';
++  /** Footer "Page X of Y" (hanya dipakai varian LACT). Kosongkan nomor untuk menyembunyikan footer. */
++  pageNumber?: string;
++  pageTotal?: string;
+ }
+ 
+ /** Menampilkan satu pasangan pilihan coret, mis. "telah / ~~belum~~" */
+@@ -61,14 +66,18 @@ export default function BeritaAcaraPage({
+   choice2b,
+   closingText,
+   signatureDataUrl,
++  variant = 'default',
++  pageNumber = '',
++  pageTotal = '',
+ }: BeritaAcaraPageProps) {
++  const isLact = variant === 'lact';
+   const tgl = parseDateLocal(tanggalISO);
+   const kata = tgl
+     ? formatTanggalKata(tgl)
+     : { hari: '…', tanggal: '…', bulan: '…', tahun: '…', singkat: '…' };
+ 
+   return (
+-    <div className="pdf-page pdf-ba-page">
++    <div className={`pdf-page pdf-ba-page${isLact ? ' pdf-ba-lact' : ''}`}>
+       <PdfHeader showLogos={showLogos} logoSize={logoSize} />
+ 
+       <h1 className="pdf-title">{docTitle}</h1>
+@@ -108,38 +117,60 @@ export default function BeritaAcaraPage({
+       <div className="pdf-ba-signer">
+         <div className="pdf-ba-signer-row">
+           <span className="pdf-ba-signer-label">Nama</span>
+-          <span>: {nama}</span>
++          <span className="pdf-ba-signer-colon">:</span>
++          <span>{nama}</span>
+         </div>
+         <div className="pdf-ba-signer-row">
+           <span className="pdf-ba-signer-label">NIK</span>
+-          <span>: {nik}</span>
++          <span className="pdf-ba-signer-colon">:</span>
++          <span>{nik}</span>
+         </div>
+         <div className="pdf-ba-signer-row">
+           <span className="pdf-ba-signer-label">Jabatan</span>
++          <span className="pdf-ba-signer-colon">:</span>
+           <span>
+-            : {jabatanBaris1} {jabatanBaris2}
++            {jabatanBaris1} {jabatanBaris2}
+           </span>
+         </div>
+       </div>
+ 
+       <p className="pdf-ba-paragraph">
+-        Sehubungan dengan <b>{project.proyek}</b> menerangkan bahwa telah melaksanakan pemeriksaan
+-        kesisteman (Commisioning Test) dan fisik pada lokasi <b>{project.lokasi}</b> sebagai
++        Sehubungan dengan <b className="pdf-ba-strong">{project.proyek}</b> menerangkan bahwa telah melaksanakan pemeriksaan
++        kesisteman (Commisioning Test) dan fisik pada lokasi <b className="pdf-ba-strong">{project.lokasi}</b> sebagai
+         berikut&nbsp;:
+       </p>
+ 
+-      <ol className="pdf-ba-numbered">
+-        <li>
+-          Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
+-          TELKOM
+-        </li>
+-        <li>
+-          Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
+-          diajukan Uji Terima (UT)
+-        </li>
+-      </ol>
++      {isLact ? (
++        <div className="pdf-ba-items">
++          <div className="pdf-ba-item">
++            <span className="pdf-ba-item-num">1.</span>
++            <span>
++              Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
++              TELKOM
++            </span>
++          </div>
++          <div className="pdf-ba-item">
++            <span className="pdf-ba-item-num">2.</span>
++            <span>
++              Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
++              diajukan Uji Terima (UT)
++            </span>
++          </div>
++        </div>
++      ) : (
++        <ol className="pdf-ba-numbered">
++          <li>
++            Pelaksanaan pekerjaan <Choice {...choice1} /> diselesaikan dengan spesifikasi teknis
++            TELKOM
++          </li>
++          <li>
++            Hasil pekerjaan <Choice {...choice2a} /> diterima dan <Choice {...choice2b} /> untuk
++            diajukan Uji Terima (UT)
++          </li>
++        </ol>
++      )}
+ 
+-      <p className="pdf-ba-paragraph">{closingText}</p>
++      <p className="pdf-ba-paragraph pdf-ba-closing">{closingText}</p>
+ 
+       <div className="pdf-ba-sign-wrap">
+         <div className="pdf-ba-sign-block">
+@@ -157,6 +188,12 @@ export default function BeritaAcaraPage({
+           <p>NIK. {nik}</p>
+         </div>
+       </div>
++
++      {isLact && pageNumber.trim() !== '' && (
++        <div className="pdf-ba-footer">
++          Page {pageNumber.trim()} of{pageTotal.trim() ? ` ${pageTotal.trim()}` : ''}
++        </div>
++      )}
+     </div>
+   );
+-}
+\ No newline at end of file
++}
+diff --git a/src/components/DaftarIsiForm.tsx b/src/components/DaftarIsiForm.tsx
+index ec57a50..144fec4 100644
+--- a/src/components/DaftarIsiForm.tsx
++++ b/src/components/DaftarIsiForm.tsx
+@@ -41,6 +41,8 @@ export default function DaftarIsiForm({
+     defaultItems.map((text) => ({ id: generateId(), text }))
+   );
+ 
++  const isLact = docTitle === 'LACT';
++
+   const [mode, setMode] = useState<'form' | 'preview'>('form');
+   const [isProcessing, setIsProcessing] = useState(false);
+   const [exportOpts, setExportOpts] = useState<SimpleExportOptions>(
+@@ -126,6 +128,8 @@ export default function DaftarIsiForm({
+             titleLine2={titleLine2}
+             titleLine3={titleLine3}
+             items={items}
++            variant={isLact ? 'lact' : 'default'}
++            pageNumber="3"
+           />
+         </div>
+       </MainLayout>
+diff --git a/src/components/DaftarIsiPage.tsx b/src/components/DaftarIsiPage.tsx
+index 0b3d1d9..051b7ea 100644
+--- a/src/components/DaftarIsiPage.tsx
++++ b/src/components/DaftarIsiPage.tsx
+@@ -14,6 +14,11 @@ interface DaftarIsiPageProps {
+   titleLine2: string;
+   titleLine3: string;
+   items: DaftarIsiItem[];
++  /** 'lact' = tampilan mengikuti Daftar Isi LACT asli; 'default' = BAUT */
++  variant?: 'lact' | 'default';
++  /** Footer "Page X of Y" (hanya varian LACT). Kosongkan nomor untuk menyembunyikan footer. */
++  pageNumber?: string;
++  pageTotal?: string;
+ }
+ 
+ export default function DaftarIsiPage({
+@@ -23,9 +28,13 @@ export default function DaftarIsiPage({
+   titleLine2,
+   titleLine3,
+   items,
++  variant = 'default',
++  pageNumber = '',
++  pageTotal = '',
+ }: DaftarIsiPageProps) {
++  const isLact = variant === 'lact';
+   return (
+-    <div className="pdf-page pdf-toc-page">
++    <div className={`pdf-page pdf-toc-page${isLact ? ' pdf-toc-lact' : ''}`}>
+       <PdfHeader showLogos={showLogos} logoSize={logoSize} />
+ 
+       <h1 className="pdf-toc-title">
+@@ -44,6 +53,12 @@ export default function DaftarIsiPage({
+           </li>
+         ))}
+       </ol>
++
++      {isLact && pageNumber.trim() !== '' && (
++        <div className="pdf-toc-footer">
++          Page {pageNumber.trim()} of{pageTotal.trim() ? ` ${pageTotal.trim()}` : ''}
++        </div>
++      )}
+     </div>
+   );
+ }
+\ No newline at end of file

@@ -41,6 +41,8 @@ export default function DaftarIsiForm({
     defaultItems.map((text) => ({ id: generateId(), text }))
   );
 
+  const isLact = docTitle === 'LACT';
+
   const [mode, setMode] = useState<'form' | 'preview'>('form');
   const [isProcessing, setIsProcessing] = useState(false);
   const [exportOpts, setExportOpts] = useState<SimpleExportOptions>(
@@ -126,6 +128,8 @@ export default function DaftarIsiForm({
             titleLine2={titleLine2}
             titleLine3={titleLine3}
             items={items}
+            variant={isLact ? 'lact' : 'default'}
+            pageNumber="3"
           />
         </div>
       </MainLayout>

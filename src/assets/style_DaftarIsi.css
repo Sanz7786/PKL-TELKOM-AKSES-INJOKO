@@ -37,3 +37,45 @@
   flex-shrink: 0;
   width: 26px;
 }
+
+/* =====================================================================
+   VARIAN LACT — mengikuti Daftar Isi LACT asli (A4, Calibri).
+   Di-scope ke .pdf-toc-lact sehingga BAUT TIDAK ikut berubah.
+   ===================================================================== */
+
+.pdf-toc-lact.pdf-page {
+  position: relative;
+  padding: 32px 66px 56px 96px; /* margin kiri 96px, kanan 66px seperti dokumen asli */
+  color: #000;
+}
+
+.pdf-toc-lact .pdf-toc-title {
+  font-size: 20pt;
+  line-height: 1.22;
+  margin: 36px 0 0;
+}
+
+.pdf-toc-lact .pdf-toc-list {
+  margin: 117px 0 0;
+  padding: 0 0 0 11px;
+}
+
+.pdf-toc-lact .pdf-toc-item {
+  gap: 0;
+  font-size: 16pt;
+  line-height: 1.22;
+  margin-bottom: 13px;
+}
+
+.pdf-toc-lact .pdf-toc-item-number {
+  width: 24px;
+}
+
+/* Footer "Page X of" di pojok kanan bawah */
+.pdf-toc-lact .pdf-toc-footer {
+  position: absolute;
+  right: 102px;
+  bottom: 20px;
+  font-family: 'Calibri', 'Carlito', 'Arial', sans-serif;
+  font-size: 9pt;
+}
