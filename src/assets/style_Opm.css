@@ -1,0 +1,103 @@
+/* ===== Halaman Data Pengukuran OPM (LACT & BAUT) ===== */
+/* Berdiri sendiri untuk bagian khas halaman ini (bingkai gambar, blok tanda
+   tangan). Kop, judul, dan tabel info proyek memakai class yang SAMA dengan
+   halaman Evidence (.pdf-header/.pdf-title/.pdf-info-table dari
+   style_Evidence.css), bukan ditiru ulang — persis seperti halaman BOQ. */
+
+.pdf-opm-page {
+  min-height: 1123px;
+}
+
+/* Bingkai gambar data pengukuran OPM. Lebar penuh halaman x tinggi 360px.
+   Diukur dari proporsi contoh dokumen asli (lebar:tinggi ≈ 2:1, dan tabelnya
+   sendiri jauh lebih tinggi dari tabel BOQ karena baris per core/port bisa
+   banyak), supaya gambar yang diunggah tampil pas — object-fit: contain
+   menjaga rasio asli gambar, tidak gepeng atau ketarik. */
+.pdf-opm-image-frame {
+  width: 100%;
+  height: 360px;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #333;
+}
+
+.pdf-opm-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pdf-opm-image-placeholder {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Blok tanda tangan, rata kanan — sama polanya dengan halaman BOQ. */
+.pdf-opm-sign-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 48px;
+}
+
+.pdf-opm-sign-block {
+  width: 280px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.pdf-opm-sign-block p {
+  margin: 2px 0;
+}
+
+.pdf-opm-sign-space {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.pdf-opm-sign-space img {
+  max-height: 90px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pdf-opm-sign-name {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+/* ===== Form: kotak upload gambar data pengukuran OPM ===== */
+
+.opm-image-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 220px;
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #888;
+  background: #fafafa;
+  overflow: hidden;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.opm-image-upload-box:hover {
+  border-color: #e30613;
+  color: #e30613;
+}
+
+.opm-image-upload-box img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #fff;
+}

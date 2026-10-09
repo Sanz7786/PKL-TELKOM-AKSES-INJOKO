@@ -1,0 +1,103 @@
+/* ===== Halaman BOQ / Bill of Quantity (LACT & BAUT) ===== */
+/* Berdiri sendiri untuk bagian khas halaman ini (tabel BOQ, blok tanda
+   tangan). Kop, judul, dan tabel info proyek memakai class yang SAMA dengan
+   halaman Evidence (.pdf-header/.pdf-title/.pdf-info-table dari
+   style_Evidence.css), bukan ditiru ulang. */
+
+.pdf-boq-page {
+  min-height: 1123px;
+}
+
+/* Bingkai gambar tabel BOQ. Ukurannya (lebar penuh halaman x tinggi 260px)
+   mengikuti proporsi contoh tabel BOQ asli (±714x224px pada halaman A4
+   lebar 794px), supaya gambar yang diunggah tampil pas, tidak gepeng atau
+   ketarik — object-fit: contain menjaga rasio asli gambar. */
+.pdf-boq-image-frame {
+  width: 100%;
+  height: 260px;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #333;
+}
+
+.pdf-boq-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pdf-boq-image-placeholder {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Blok tanda tangan, rata kanan — sama polanya dengan halaman Berita Acara,
+   dibuat ulang di sini (bukan di-import) supaya file ini tetap berdiri sendiri. */
+.pdf-boq-sign-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 48px;
+}
+
+.pdf-boq-sign-block {
+  width: 280px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.pdf-boq-sign-block p {
+  margin: 2px 0;
+}
+
+.pdf-boq-sign-space {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.pdf-boq-sign-space img {
+  max-height: 90px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pdf-boq-sign-name {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+/* ===== Form: kotak upload gambar BOQ (pengganti tabel entri baris manual) ===== */
+
+.boq-image-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 220px;
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #888;
+  background: #fafafa;
+  overflow: hidden;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.boq-image-upload-box:hover {
+  border-color: #e30613;
+  color: #e30613;
+}
+
+.boq-image-upload-box img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #fff;
+}

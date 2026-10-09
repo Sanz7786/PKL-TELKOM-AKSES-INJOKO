@@ -1,0 +1,122 @@
+/* ===== Halaman Berita Acara / Laporan Commisioning Test (LACT & BAUT) ===== */
+/* Berdiri sendiri untuk bagian yang KHAS halaman ini (paragraf, blok
+   penandatangan, tanda tangan). Kop, judul, dan tabel info memakai class
+   yang SAMA dengan halaman Evidence (.pdf-header/.pdf-title/.pdf-info-table
+   dari style_Evidence.css) supaya benar-benar konsisten, bukan ditiru ulang. */
+
+.pdf-ba-page {
+  min-height: 1123px; /* ~ proporsi A4, sama seperti Cover & Daftar Isi */
+}
+
+.pdf-ba-paragraph {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 16px 0;
+  text-align: justify;
+}
+
+.pdf-ba-choice-selected {
+  font-weight: 700;
+}
+
+.pdf-ba-choice-unselected {
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+/* Blok Nama / NIK / Jabatan penandatangan (label TIDAK tebal, beda dari
+   .pdf-info-label yang tebal di tabel PROYEK/KONTRAK/dst) */
+.pdf-ba-signer {
+  margin: 10px 0 4px 40px;
+}
+
+.pdf-ba-signer-row {
+  display: flex;
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.pdf-ba-signer-label {
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.pdf-ba-numbered {
+  margin: 12px 0;
+  padding-left: 22px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.pdf-ba-numbered li {
+  margin-bottom: 4px;
+}
+
+/* Blok tanda tangan, rata kanan seperti dokumen resmi */
+.pdf-ba-sign-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.pdf-ba-sign-block {
+  width: 280px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.pdf-ba-sign-block p {
+  margin: 2px 0;
+}
+
+.pdf-ba-sign-space {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.pdf-ba-sign-space img {
+  max-height: 90px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pdf-ba-sign-name {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+/* ===== Form: pilihan telah/belum dkk. sebagai tombol pilihan sederhana ===== */
+
+.ba-choice-group {
+  display: inline-flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 4px;
+}
+
+.ba-choice-btn {
+  border: none;
+  background: #fff;
+  color: #333;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ba-choice-btn.active {
+  background: #e30613;
+  color: #fff;
+  font-weight: 600;
+}
+
+.ba-signature-preview {
+  max-width: 220px;
+  max-height: 90px;
+  object-fit: contain;
+  display: block;
+  margin-top: 8px;
+}

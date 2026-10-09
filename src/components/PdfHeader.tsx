@@ -1,48 +1,43 @@
 import { useState } from 'react';
-import { BRAND, type LogoSize } from '../config/brand';
+import { BRAND, LOGO_HEIGHT_PX, type LogoSize } from '../config/brand';
 
 interface PdfHeaderProps {
   showLogos: boolean;
   logoSize: LogoSize;
 }
 
-/**
- * Lebar logo (px, pada halaman A4 selebar 794 px). Tinggi mengikuti otomatis.
- * Proporsi TelkomAkses : infraNexia = 1,37 : 1, sama dengan dokumen resmi.
- * Kalau terasa kurang pas, cukup ubah angka di sini.
- */
-const LOGO_WIDTH_PX: Record<LogoSize, { left: number; right: number }> = {
-  kecil: { left: 88, right: 120 },
-  sedang: { left: 108, right: 148 },
-  besar: { left: 135, right: 185 },
-};
-
-function Logo({ src, alt, width }: { src: string; alt: string; width: number }) {
+function Logo({ src, alt, height }: { src: string; alt: string; height: number }) {
   const [failed, setFailed] = useState(false);
   if (failed) return <span className="pdf-logo-text">{alt}</span>;
   return (
     <img
       src={src}
       alt={alt}
-      style={{ width: `${width}px`, height: 'auto', display: 'block' }}
+      style={{ height: `${height}px`, width: 'auto', display: 'block' }}
       onError={() => setFailed(true)}
     />
   );
 }
 
+/**
+ * Kedua logo diberi TINGGI yang sama (bukan lebar masing-masing secara manual).
+ * File di public/logos/ sudah dipotong rapat dengan kanvas setinggi 300px dan
+ * garis dasar teks yang SEJAJAR (lihat komentar di src/config/brand.ts), jadi
+ * dengan tinggi sama, lebar tiap logo otomatis mengikuti proporsi aslinya dan
+ * garis dasarnya tetap sejajar — tidak perlu diatur manual per sisi.
+ */
 export default function PdfHeader({ showLogos, logoSize }: PdfHeaderProps) {
   if (!showLogos) return null;
 
-  const w = LOGO_WIDTH_PX[logoSize] ?? LOGO_WIDTH_PX.sedang;
+  const h = LOGO_HEIGHT_PX[logoSize] ?? LOGO_HEIGHT_PX.sedang;
 
   return (
     <div
       className="pdf-header"
-      // flex-end: dasar kedua logo sejajar, seperti di dokumen resmi
       style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}
     >
-      <Logo src={BRAND.left.src} alt={BRAND.left.alt} width={w.left * BRAND.left.scale} />
-      <Logo src={BRAND.right.src} alt={BRAND.right.alt} width={w.right * BRAND.right.scale} />
+      <Logo src={BRAND.left.src} alt={BRAND.left.alt} height={h * BRAND.left.scale} />
+      <Logo src={BRAND.right.src} alt={BRAND.right.alt} height={h * BRAND.right.scale} />
     </div>
   );
 }

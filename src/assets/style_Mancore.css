@@ -1,0 +1,104 @@
+/* ===== Halaman Lampiran Mancore (LACT & BAUT) ===== */
+/* Berdiri sendiri untuk bagian khas halaman ini (bingkai gambar, blok tanda
+   tangan). Kop, judul, dan tabel info proyek memakai class yang SAMA dengan
+   halaman Evidence (.pdf-header/.pdf-title/.pdf-info-table dari
+   style_Evidence.css), bukan ditiru ulang — persis seperti halaman BOQ &
+   Data Pengukuran OPM. */
+
+.pdf-mancore-page {
+  min-height: 1123px;
+}
+
+/* Bingkai gambar lampiran mancore. Lebar penuh halaman x tinggi 260px.
+   Diukur dari proporsi contoh dokumen asli (lebar:tinggi ≈ 3,2:1 — gabungan
+   tabel OLT/FTM, FEEDER/ODC/SPLITTER, dan DISTRIBUSI/ODP, cukup pendek
+   karena melebar ke samping), supaya gambar yang diunggah tampil pas —
+   object-fit: contain menjaga rasio asli gambar, tidak gepeng atau ketarik. */
+.pdf-mancore-image-frame {
+  width: 100%;
+  height: 260px;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #333;
+}
+
+.pdf-mancore-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pdf-mancore-image-placeholder {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Blok tanda tangan, rata kanan — sama polanya dengan halaman BOQ & OPM. */
+.pdf-mancore-sign-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 48px;
+}
+
+.pdf-mancore-sign-block {
+  width: 280px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.pdf-mancore-sign-block p {
+  margin: 2px 0;
+}
+
+.pdf-mancore-sign-space {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.pdf-mancore-sign-space img {
+  max-height: 90px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pdf-mancore-sign-name {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+/* ===== Form: kotak upload gambar lampiran mancore ===== */
+
+.mancore-image-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 220px;
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #888;
+  background: #fafafa;
+  overflow: hidden;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.mancore-image-upload-box:hover {
+  border-color: #e30613;
+  color: #e30613;
+}
+
+.mancore-image-upload-box img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #fff;
+}

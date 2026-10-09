@@ -1,0 +1,39 @@
+/* ===== Halaman Daftar Isi (LACT & BAUT) ===== */
+/* Berdiri sendiri, tidak menimpa class apa pun di style_Evidence.css /
+   style_Cover.css. Hanya dipakai oleh DaftarIsiPage.tsx & DaftarIsiForm.tsx. */
+
+.pdf-toc-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 1123px; /* ~ proporsi A4, sama seperti halaman Cover */
+}
+
+.pdf-toc-title {
+  text-align: center;
+  font-family: 'Calibri', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 22pt;
+  line-height: 1.35;
+  margin: 24px 0 0;
+}
+
+.pdf-toc-list {
+  list-style: none;
+  margin: 140px 0 0;
+  padding: 0 8px;
+}
+
+.pdf-toc-item {
+  display: flex;
+  gap: 10px;
+  font-family: 'Calibri', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14pt;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.pdf-toc-item-number {
+  flex-shrink: 0;
+  width: 26px;
+}

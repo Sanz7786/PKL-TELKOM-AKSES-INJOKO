@@ -30,8 +30,11 @@ export const QUALITY_PRESETS: Record<PdfQuality, { scale: number; jpeg: number; 
   tajam: { scale: 3, jpeg: 0.95, label: 'Tajam (file lebih besar)' },
 };
 
-/** Bersihkan nama file dari karakter terlarang dan pastikan berakhiran .pdf */
-export function buildPdfFileName(options: ExportOptions, fallback: string): string {
+/** Bersihkan nama file dari karakter terlarang dan pastikan berakhiran .pdf.
+ *  Parameter cukup { fileName }, bukan ExportOptions penuh, supaya bisa dipakai
+ *  bersama oleh SimpleExportOptionsPanel (Cover/Daftar Isi/BOQ/dst.) juga —
+ *  tanpa menduplikasi fungsi ini. */
+export function buildPdfFileName(options: { fileName: string }, fallback: string): string {
   const raw = (options.fileName.trim() || fallback).replace(/[\\/:*?"<>|]+/g, '_');
   return raw.toLowerCase().endsWith('.pdf') ? raw : `${raw}.pdf`;
 }

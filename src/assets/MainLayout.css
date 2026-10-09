@@ -213,7 +213,9 @@
 }
 
 .sub-menu-container.open {
-  max-height: 500px;
+  /* Dinaikkan karena sekarang ada 14 item per Tools (Cover s.d Kompres Foto).
+     Dibuat jauh lebih longgar supaya aman kalau item ditambah lagi nanti. */
+  max-height: 3000px;
   opacity: 1;
   margin-bottom: 10px;
 }

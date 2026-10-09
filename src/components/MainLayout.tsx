@@ -11,7 +11,7 @@ interface MainLayoutProps {
 interface SubMenu {
   id: string;
   label: string;
-  mode: 'single' | 'bulk' | 'compress'; // dibaca oleh halaman lewat ?mode=...
+  mode: 'cover' | 'daftar-isi' | 'berita-acara' | 'boq' | 'single' | `evidence${number}` | 'opm' | 'mancore' | 'kml' | 'compress'; // dibaca oleh halaman lewat ?mode=...
   href: string;
 }
 
@@ -32,8 +32,32 @@ const menus: MenuItem[] = [
     label: 'Tools LACT',
     icon: 'images/audit.png',
     children: [
+      { id: 'lact-cover', label: 'Cover', mode: 'cover', href: '/lact?mode=cover' },
+      { id: 'lact-daftar-isi', label: 'Daftar Isi', mode: 'daftar-isi', href: '/lact?mode=daftar-isi' },
+      { id: 'lact-berita-acara', label: 'Laporan Commisioning Test', mode: 'berita-acara', href: '/lact?mode=berita-acara' },
+      { id: 'lact-boq', label: 'BOQ', mode: 'boq', href: '/lact?mode=boq' },
+      // 10 fitur INDEPENDEN: masing-masing punya daftar foto & keterangan sendiri,
+      // tidak saling berbagi data walau tampilan/caranya sama persis.
+      // Evidence 4 menggantikan "Upload Sekaligus" versi lama (nama diganti saja).
+      ...Array.from({ length: 12 }, (_, i) => ({
+        id: `lact-evidence-${i + 1}`,
+        label: `Lampiran Evidence ${i + 1}`,
+        mode: `evidence${i + 1}` as SubMenu['mode'],
+        href: `/lact?mode=evidence${i + 1}`,
+      })),
+      // Halaman tersendiri (header + judul + tabel info proyek + satu gambar
+      // data pengukuran OPM + blok tanda tangan), polanya sama seperti BOQ.
+      // Lihat OpmForm.tsx / OpmPage.tsx, dirutekan dari Lact.tsx (mode 'opm').
+      { id: 'lact-opm', label: 'Data Pengukuran OPM', mode: 'opm', href: '/lact?mode=opm' },
+      // Halaman tersendiri juga, polanya sama seperti BOQ & Data Pengukuran
+      // OPM. Lihat MancoreForm.tsx / MancorePage.tsx, dirutekan dari Lact.tsx
+      // (mode 'mancore').
+      { id: 'lact-mancore', label: 'Lampiran Mancore', mode: 'mancore', href: '/lact?mode=mancore' },
+      // Halaman tersendiri juga, polanya sama seperti BOQ/OPM/Mancore,
+      // hanya saja TANPA blok tanda tangan (lihat catatan di KmlPage.tsx).
+      // Lihat KmlForm.tsx / KmlPage.tsx, dirutekan dari Lact.tsx (mode 'kml').
+      { id: 'lact-kml', label: 'Lampiran KML', mode: 'kml', href: '/lact?mode=kml' },
       { id: 'lact-single', label: 'Upload Satu per Satu', mode: 'single', href: '/lact?mode=single' },
-      { id: 'lact-bulk', label: 'Upload Sekaligus', mode: 'bulk', href: '/lact?mode=bulk' },
       { id: 'lact-compress', label: 'Kompres Foto', mode: 'compress', href: '/lact?mode=compress' },
     ],
   },
@@ -42,8 +66,23 @@ const menus: MenuItem[] = [
     label: 'Tools BAUT',
     icon: 'images/audit.png',
     children: [
+      { id: 'baut-cover', label: 'Cover', mode: 'cover', href: '/baut?mode=cover' },
+      { id: 'baut-daftar-isi', label: 'Daftar Isi', mode: 'daftar-isi', href: '/baut?mode=daftar-isi' },
+      { id: 'baut-berita-acara', label: 'Berita Acara Uji Terima', mode: 'berita-acara', href: '/baut?mode=berita-acara' },
+      { id: 'baut-boq', label: 'BOQ', mode: 'boq', href: '/baut?mode=boq' },
+      ...Array.from({ length: 12 }, (_, i) => ({
+        id: `baut-evidence-${i + 1}`,
+        label: `Lampiran Evidence ${i + 1}`,
+        mode: `evidence${i + 1}` as SubMenu['mode'],
+        href: `/baut?mode=evidence${i + 1}`,
+      })),
+      // Sama seperti di Tools LACT: halaman tersendiri, lihat OpmForm.tsx.
+      { id: 'baut-opm', label: 'Data Pengukuran OPM', mode: 'opm', href: '/baut?mode=opm' },
+      // Sama seperti di Tools LACT: halaman tersendiri, lihat MancoreForm.tsx.
+      { id: 'baut-mancore', label: 'Lampiran Mancore', mode: 'mancore', href: '/baut?mode=mancore' },
+      // Sama seperti di Tools LACT: halaman tersendiri, lihat KmlForm.tsx.
+      { id: 'baut-kml', label: 'Lampiran KML', mode: 'kml', href: '/baut?mode=kml' },
       { id: 'baut-single', label: 'Upload Satu per Satu', mode: 'single', href: '/baut?mode=single' },
-      { id: 'baut-bulk', label: 'Upload Sekaligus', mode: 'bulk', href: '/baut?mode=bulk' },
       { id: 'baut-compress', label: 'Kompres Foto', mode: 'compress', href: '/baut?mode=compress' },
     ],
   },
